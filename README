@@ -1,0 +1,113 @@
+# Copyright 2021 Stefanita Ionita
+
+********************************************************************************
+
+In functia main am creat directorul home, am alocat memorie si am apelat o
+functie care atribuie numele si seteaza pointerii. Am salvat home intr-un
+director saved_home pentru a apela functia de free pentru el. In do while am
+citit linie cu linie, am verificat comenzile si am apelat functiile
+corespunzator. Functia stop apeleaza functia free_all, dupa care foloseste break
+pentru a iesi din while.
+
+********************************************************************************
+- main_init creeaza directorul parinte "home", aloca memorie, atribuie numele si
+seteaza pointerii catre NULL;
+
+- get_last_file parcurge lista de fisiere a directorului parent pana la NULL
+si returneaza ultimul fisier gasit;
+
+- get_last_dir parcurge lista de directoare a directorului parent pana la NULL
+si returneaza ultimul director gasit;
+
+- check_get_file parcurge lista de fisiere pana gaseste fisierul cu numele name
+si il returneaza daca este gasit, in caz contrar returneaza NULL;
+
+- check_get_dir parcurge lista de directoare pana gaseste directoru cu numele
+name si il returneaza daca este gasit, in caz contrar returneaza NULL;
+
+- touch adauga un fisier cu numele name la finalul listei de fisiere a
+directorului parent. Verifica in primul rand daca exista un fisier cu numele
+name, in cazul in care nu exista aloca memorie si atribuie numele.
+In cazul in care nu exista un head al listei de fisiere, fisierul ce trebuie
+creat devine head-ul, in caz contrar este adaugat la finalul listei;
+
+- mkdir adauga un director cu numele name la finalul listei de directoare
+a directorului parent. Verifica daca exista un director cu numele name, in cazul
+in care nu exista aloca memorie pentru director si atribuie numele. Verifica
+daca exista un head al listei de directoare si in cazul in care nu exista,
+directorul ce trebuie creat devine head-ul, in caz contrar este adaugat la
+finalul listei;
+
+- ls afiseaza numele tuturor directoarelor si fiserelor din directorul parent,
+prima data directoarele, apoi fisierele;
+
+- remove_file returneaza un fisier caruia ii dau free in functia rm. Verifica
+daca fisierul pe care vreau sa-l sterg este head-ul, in acest caz trebuie mutat
+cu o pozitie la dreapta, dar este posibil sa fie si singurul fisier din lista.
+Sunt tratate ambele cazuri. Verifica si daca fisierul care trebuie sters este la
+finalul listei, in acest caz trebuie ca pointerul next al penultimului fisier sa
+pointeze la NULL. In cazul in care fisierul ce trebuie sters este intre head-ul
+si tail-ul listei, trebuie ca fisierul ce-l preceda sa pointeze la next-ul sau.
+
+- rm verifica daca exista fisierul cu numele name care trebuie sters. In cazul
+in care exista, este apelata functia remove_file si este eliberata memoria
+alocata fisierului.
+
+- remove_dir returneaza un director caruia ii dau free in functia rm_dir.
+Verifica daca directorul pe care vreau sa-l sterg este head-ul, in acest caz
+trebuie mutat head-ul cu o pozitie la dreapta, dar este posibil sa fie si
+singurul din lista. Sunt tratate ambele cazuri. Verifica si daca directorul
+care trebuie sters este la finalul listei, in acest caz trebuie ca pointerul
+next al penultimului director sa pointeze la NULL. In cazul in care directorul
+care trebuie sters este intre head-ul si tal-ul listei, trebuie ca directorul
+precedent sa pointeze la next-ul sau;
+
+- free_all elibereaza memoria alocata atat fisierelor cat si directoarelor din
+directorul parent. Elibereaza, prima data, memoria alocata fisierelor, apoi
+parcurge lista de directoare si apeleaza functia free_all pentru fiecare
+director gasit;
+
+- rmdir verifica, initial, daca exista directorul ce trebuie sters. In cazul
+in care exista, apelez functia remove_dir si eliberez memoria alocata folosind
+free_all;
+
+- cd verifica daca name este ".." pentru a face target sa pointeze la parintele
+sau, daca exista name in lista de directoare. In cazul in care se doreste
+schimbarea directorului intr-unul existent, apelez functia check_get_dir si
+fac ca target sa pointeze la directorul gasit de functie;
+
+- pwd returneaza o cale catre directorul target. Parcurg ierarhia de directoare
+in sens invers, de la sfarsit catre home si adaug intr-un array de directoare
+fiecare director gasit. Parcurg apoi array-ul de directoare de la sfarsit spre
+inceput pentru a obtine calea corecta, de la home la target, concatenand
+intr-un aux "/" si numele fiecarui director.
+
+- stop apeleaza functia free_all si opreste programul
+
+- get_level returneaza numarul de nivele ale ierarhiei de directoare;
+
+- add_spaces returneaza un string format din spatii. Este utila in tree;
+
+- get_dir_size returneaza numarul de directoare din directorul target;
+
+- tree afiseaza ierarhia. In cazul in care level este 1, inseamna ca exista doar
+un director prin care poti trece din directorul home. In caz contrar, este
+afisata ierarhia, pornind din directorul target;
+
+- mv modifica numele unui fiser sau al unui director. Verifica initial daca
+numele pe care vrem sa-l atribuim unui fisier apartine unui director sau daca
+numele pe care vrem sa-l atribuim unui director apartine deja unui fisier. In
+cazul in care se doreste schimbarea numelui unui fisier, fisierul cu numele
+oldname este sters folosind rm si este creat unul nou cu numele newname folosind
+touch. In cazul in care se doreste redenumirea unui director, verific daca este
+gol, in acest caz il pot sterge folosind rmdir si sa creez un director nou cu
+numele newname folosind mkdir. In cazul in care directorul nu este gol, creez un
+director cu numele newname, in interiorul caruia ii creez fisierele din
+directorul cu numele oldname. La final, sterg directorul cu numele oldname. In
+ultimul rand, am verificat daca exista un fisier/director cu numele oldname
+pentru a fi modificat.
+
+FEEDBACK: Tema a fost super faina, nu m-am simtit stresat cand am facut-o. Chiar
+a fost o placere sa imi bat capul la ea:)) Nu a fost nici usoara, dar nici
+complicata sa ne faca sa nu dormim noaptea. Sper sa continuati sa mai faceti
+teme accesibile si creative cum a fost aceasta. Toate cele bune! <3
